@@ -4,7 +4,9 @@ import "./credit-card.css";
 export default props => {
   return (
     <div className="credit-card">
-      <div className="credit-card-logo">LOGO</div>
+      <div className="credit-card-logo">
+        <img src={props.logoSrc} alt="logo" />
+      </div>
       <div className="credit-card-number">{props.number}</div>
       <div className="credit-card-info">
         <div className="credit-card-info-name">

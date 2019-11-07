@@ -12,6 +12,18 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
+.credit-card-logo {
+  width: 60px;
+  height: 30px;
+  top: 20px;
+  right: 20px;
+}
+
+.credit-card-logo img {
+  width: 100%;
+  float: right;
+}
+
 .credit-card-number {
   display: flex;
   justify-content: center;

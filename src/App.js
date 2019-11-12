@@ -1,10 +1,10 @@
 import React from "react";
-import CreditCardForm from "./CreditCardForm";
+import FormContainer from "./FormContainer";
 
 function App() {
   return (
     <div className="App">
-      <CreditCardForm />
+      <FormContainer />
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.container {
+  width: 396px;
+  margin: 100px auto;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-group {
+  display: flex;
+}

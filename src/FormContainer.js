@@ -3,6 +3,7 @@ import VirtualCreditCard from "./CreditCard";
 import Input from "./Input";
 import Button from "./Button";
 import FormErrors from "./FormErrors";
+import "./form-container.css";
 
 export default class CreditCardForm extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class CreditCardForm extends Component {
     let { ccNameValid, numberValid, expValid, cvcValid } = this.state;
     switch (fieldName) {
       case "ccName":
-        ccNameValid = value.match(/^[a-zA-z]+/);
+        ccNameValid = value.match(/^[a-zA-z]+$/);
         fieldValidationErrors.ccName = ccNameValid ? "" : "Name is invalid";
         break;
       case "number":
@@ -91,66 +92,66 @@ export default class CreditCardForm extends Component {
     } = this.state;
     return (
       <div>
-        <VirtualCreditCard
-          ccName={ccName}
-          number={number}
-          exp={exp}
-          cvc={cvc}
-          isFlipped={isFlipped}
-        />
-        <FormErrors formErrors={formErrors} />
-        <form>
-          <div>
-            {/* Credit Card Number */}
-            <Input
-              type="text"
-              name="number"
-              title="Card Number"
-              value={number}
-              onChange={this.handleUserInput}
-              onFocus={this.handleClickUnFlip}
-              maxLength="16"
-            />
+        <div className="container">
+          <VirtualCreditCard
+            ccName={ccName}
+            number={number}
+            exp={exp}
+            cvc={cvc}
+            isFlipped={isFlipped}
+          />
+          <div className="form-container">
+            <FormErrors formErrors={formErrors} />
+            <form>
+              <div className="form-group">
+                {/* Credit Card Number */}
+                <Input
+                  type="text"
+                  name="number"
+                  title="Card Number"
+                  value={number}
+                  onChange={this.handleUserInput}
+                  onFocus={this.handleClickUnFlip}
+                  maxLength="16"
+                />
+                {/* Cardholder's Name */}
+                <Input
+                  type="text"
+                  name="ccName"
+                  title="Name on card"
+                  value={ccName}
+                  onChange={this.handleUserInput}
+                  onFocus={this.handleClickUnFlip}
+                />
+              </div>
+              <div className="form-group">
+                {/* Expiration date */}
+                <Input
+                  type="text"
+                  name="exp"
+                  title="Expiration date"
+                  value={exp}
+                  placeholder="MM / YY"
+                  onChange={this.handleUserInput}
+                  onFocus={this.handleClickUnFlip}
+                  maxLength="4"
+                />
+                {/* Security code */}
+                <Input
+                  type="text"
+                  name="cvc"
+                  title="Security code"
+                  value={cvc}
+                  onChange={this.handleUserInput}
+                  onFocus={this.handleClickFlip}
+                  maxLength="3"
+                />
+              </div>
+              <Button title="Submit" disabled={!this.state.formValid} />
+              <p>Form is {formValid ? "valid" : "invalid"}</p>
+            </form>
           </div>
-          {/* Cardholder's Name */}
-          <div>
-            <Input
-              type="text"
-              name="ccName"
-              title="Name on card"
-              value={ccName}
-              onChange={this.handleUserInput}
-              onFocus={this.handleClickUnFlip}
-            />
-          </div>
-          <div>
-            {/* Expiration date */}
-            <Input
-              type="text"
-              name="exp"
-              title="Expiration date"
-              value={exp}
-              placeholder="MM / YY"
-              onChange={this.handleUserInput}
-              onFocus={this.handleClickUnFlip}
-              maxLength="4"
-            />
-          </div>
-          <div>
-            {/* Security code */}
-            <Input
-              type="text"
-              name="cvc"
-              title="Security code"
-              value={cvc}
-              onChange={this.handleUserInput}
-              onFocus={this.handleClickFlip}
-              maxLength="3"
-            />
-          </div>
-          <Button title="Pay" disabled={!this.state.formValid} />
-          <p>Form is {formValid ? "valid" : "invalid"}</p>
-        </form>
+        </div>
       </div>
     );
   }

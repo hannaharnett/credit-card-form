@@ -1,12 +1,7 @@
-input:focus {
-  outline: none;
-}
-
 .card-container {
   width: 400px;
-  height: 250px;
+  height: 240px;
   perspective: 600px;
-  margin: 150px 0 30px 150px;
   font-family: "Electrolize", sans-serif;
 }
 
@@ -33,11 +28,17 @@ input:focus {
 }
 
 .card-face-front {
-  background: red;
+  background: rgb(8, 37, 80);
+  background: linear-gradient(
+    315deg,
+    rgba(8, 37, 80, 1) 0%,
+    rgba(20, 85, 184, 1) 78%,
+    rgba(0, 131, 255, 1) 100%
+  );
 }
 
 .card-face-back {
-  background: blue;
+  background: #1455b8;
   transform: rotateY(180deg);
 }
 

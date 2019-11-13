@@ -1,8 +1,9 @@
 import React from "react";
+import "./input.css";
 
 const Input = props => {
   return (
-    <div>
+    <div className="input-container">
       <label for={props.name} className="form-label">
         {props.title}
       </label>

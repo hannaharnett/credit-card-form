@@ -37,11 +37,13 @@ export default class CreditCardForm extends Component {
     switch (fieldName) {
       case "ccName":
         ccNameValid = value.match(/^[a-zA-z]+$/);
-        fieldValidationErrors.ccName = ccNameValid ? "" : "Name is invalid";
+        fieldValidationErrors.ccName = ccNameValid ? "" : "Please enter name";
         break;
       case "number":
         numberValid = value.match(/^[0-9]{16}/);
-        fieldValidationErrors.number = numberValid ? "" : "Number is invalid";
+        fieldValidationErrors.number = numberValid
+          ? ""
+          : "Please enter card number";
         break;
       case "exp":
         expValid = value.match(/^[0-9]{4}/);
@@ -81,15 +83,7 @@ export default class CreditCardForm extends Component {
     this.setState({ isFlipped: false });
   }
   render() {
-    const {
-      ccName,
-      number,
-      exp,
-      cvc,
-      formErrors,
-      formValid,
-      isFlipped
-    } = this.state;
+    const { ccName, number, exp, cvc, formErrors, isFlipped } = this.state;
     return (
       <div>
         <div className="container">
@@ -148,7 +142,6 @@ export default class CreditCardForm extends Component {
                 />
               </div>
               <Button title="Submit" disabled={!this.state.formValid} />
-              <p>Form is {formValid ? "valid" : "invalid"}</p>
             </form>
           </div>
         </div>

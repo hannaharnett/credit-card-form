@@ -15,3 +15,8 @@
 .form-button:hover {
   text-decoration: underline;
 }
+
+.form-button:disabled:hover {
+  cursor: not-allowed;
+  text-decoration: none;
+}

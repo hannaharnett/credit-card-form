@@ -29,20 +29,20 @@ const cards = [
   }
 ];
 
-const changeLogo = props => {
+const changeLogo = number => {
   let src;
   // Sets logo by checking first digits
   // Mastercard
-  if (/^(5[0-6])/.test(props.number)) {
+  if (/^(5[0-6])/.test(number)) {
     src = cards[1].src;
     // Visa
-  } else if (/^4/.test(props.number)) {
+  } else if (/^4/.test(number)) {
     src = cards[2].src;
     // Dinersclub
-  } else if (/^(3[689])/.test(props.number)) {
+  } else if (/^(3[689])/.test(number)) {
     src = cards[3].src;
     // American Express
-  } else if (/^(3[47])/.test(props.number)) {
+  } else if (/^(3[47])/.test(number)) {
     src = cards[4].src;
     // Blank logo
   } else {
@@ -51,13 +51,24 @@ const changeLogo = props => {
   return src;
 };
 
+const addSlashToDate = exp => {
+  var split = 2;
+  var arr = [];
+
+  for (var i = 0; i < exp.length; i += split) {
+    arr.push(exp.substr(i, split));
+  }
+
+  return arr.join("/");
+};
+
 export default props => {
   return (
     <div className="card-container">
       <div className={"card " + (props.isFlipped ? "is-flipped" : "")}>
         <div className="card-face-front card-face">
           <div className="card-logo">
-            <img src={changeLogo(props)} alt="logo" />
+            <img src={changeLogo(props.number)} alt="logo" />
           </div>
           <div className="card-number">{props.number}</div>
           <div className="card-info">
@@ -65,7 +76,7 @@ export default props => {
               <div>{props.ccName ? props.ccName : "Name on card"}</div>
             </div>
             <div className="card-info-expiry">
-              <div>{props.exp ? props.exp : "valid thru"}</div>
+              <div>{props.exp ? addSlashToDate(props.exp) : "valid thru"}</div>
             </div>
           </div>
         </div>

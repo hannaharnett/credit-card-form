@@ -1,4 +1,5 @@
 import React from "react";
+import "./form-errors.css";
 
 const FormErrors = ({ formErrors }) => {
   return (

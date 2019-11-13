@@ -1,5 +1,5 @@
 .container {
-  width: 396px;
+  width: 400px;
   margin: 100px auto;
 }
 
@@ -9,4 +9,8 @@
 
 .form-group {
   display: flex;
+}
+
+.invalid {
+  color: red;
 }

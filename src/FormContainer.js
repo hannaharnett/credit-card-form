@@ -105,8 +105,11 @@ export default class CreditCardForm extends Component {
   render() {
     const { ccName, number, exp, cvc, formErrors, isFlipped } = this.state;
     return (
-      <div>
-        <div className="container">
+      <>
+        <header>
+          <h1>React Credit Card Form</h1>
+        </header>
+        <main className="container">
           <VirtualCreditCard
             ccName={ccName}
             number={number}
@@ -114,66 +117,59 @@ export default class CreditCardForm extends Component {
             cvc={cvc}
             isFlipped={isFlipped}
           />
-          <div className="form-container">
-            <form onSubmit={this.handleSubmit}>
-              {/* <FormErrors formErrors={formErrors.number} /> */}
-              <div className="form-group">
-                {/* Credit Card Number */}
-                <Input
-                  id="number"
-                  name="number"
-                  type="text"
-                  title="Card Number"
-                  value={number}
-                  onChange={this.handleUserInput}
-                  onFocus={this.handleClickUnFlip}
-                  maxLength="16"
-                  ref={this.inputFocus}
-                />
-                <FormErrors formError={formErrors.number} />
-                {/* Cardholder's Name */}
-                <Input
-                  id="ccName"
-                  name="ccName"
-                  type="text"
-                  title="Name on card"
-                  value={ccName}
-                  onChange={this.handleUserInput}
-                  onFocus={this.handleClickUnFlip}
-                />
-                <FormErrors formError={formErrors.ccName} />
-              </div>
-              <div className="form-group">
-                {/* Expiration date */}
-                <Input
-                  id="exp"
-                  name="exp"
-                  type="text"
-                  title="Expiration date"
-                  value={exp}
-                  onChange={this.handleUserInput}
-                  onFocus={this.handleClickUnFlip}
-                  maxLength="4"
-                />
-                <FormErrors formError={formErrors.exp} />
-                {/* Security code */}
-                <Input
-                  id="cvc"
-                  name="cvc"
-                  type="text"
-                  title="Security code"
-                  value={cvc}
-                  onChange={this.handleUserInput}
-                  onFocus={this.handleClickFlip}
-                  maxLength="3"
-                />
-                <FormErrors formError={formErrors.cvc} />
-              </div>
-              <input type="submit" value="Submit" disabled={!this.state.formValid} />
-            </form>
-          </div>
-        </div>
-      </div>
+          <form onSubmit={this.handleSubmit}>
+              {/* Credit Card Number */}
+              <Input
+                id="number"
+                name="number"
+                type="text"
+                title="Card Number"
+                value={number}
+                onChange={this.handleUserInput}
+                onFocus={this.handleClickUnFlip}
+                maxLength="16"
+                ref={this.inputFocus}
+              />
+              <FormErrors formError={formErrors.number} />
+              {/* Cardholder's Name */}
+              <Input
+                id="ccName"
+                name="ccName"
+                type="text"
+                title="Name on card"
+                value={ccName}
+                onChange={this.handleUserInput}
+                onFocus={this.handleClickUnFlip}
+              />
+              <FormErrors formError={formErrors.ccName} />
+              {/* Expiration date */}
+              <Input
+                id="exp"
+                name="exp"
+                type="text"
+                title="Expiration date"
+                value={exp}
+                onChange={this.handleUserInput}
+                onFocus={this.handleClickUnFlip}
+                maxLength="4"
+              />
+              <FormErrors formError={formErrors.exp} />
+              {/* Security code */}
+              <Input
+                id="cvc"
+                name="cvc"
+                type="text"
+                title="Security code"
+                value={cvc}
+                onChange={this.handleUserInput}
+                onFocus={this.handleClickFlip}
+                maxLength="3"
+              />
+              <FormErrors formError={formErrors.cvc} />
+            <input type="submit" value="Submit" disabled={!this.state.formValid} />
+          </form>
+        </main>
+      </>
     );
   }
 }

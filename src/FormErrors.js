@@ -1,17 +1,17 @@
 import React from "react";
 import "./form-errors.css";
 
-const FormErrors = ({ formErrors }) => {
+const FormErrors = ({ formError }) => {
+  let errorMessage;
+  if (formError.length > 0) {
+    errorMessage = <p aria-label="error-message" >{formError}</p>
+  } else {
+    errorMessage = ""
+  }
   return (
-    <div>
-      {Object.keys(formErrors).map((fieldName, i) => {
-        if (formErrors[fieldName].length > 0) {
-          return <p key={i}>{formErrors[fieldName]}</p>;
-        } else {
-          return "";
-        }
-      })}
-    </div>
+    <>
+      {errorMessage}
+    </>
   );
 };
 

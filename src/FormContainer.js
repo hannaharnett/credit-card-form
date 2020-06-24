@@ -30,10 +30,16 @@ export default class CreditCardForm extends Component {
   componentDidMount() {
     this.inputFocus.current.focus();
   }
-  handleUserInput = event => {
+  handleUserInput(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value }, () => this.validateField(name, value));
-  };
+    this.setState({ [name]: value}, () => {
+      let timeout = null;
+      // Clearning timout first will prevent the previous task 
+      // from executing if it has been less than 1000ms
+      clearTimeout(timeout);
+      timeout = setTimeout(() => this.validateField(name, value), 1000);
+    })
+  }
   // Validate each input and updates error object in state
   validateField(fieldName, value) {
     let fieldValidationErrors = this.state.formErrors;
@@ -42,21 +48,21 @@ export default class CreditCardForm extends Component {
     switch (fieldName) {
       case "ccName":
         ccNameValid = (value.match(/^[a-zA-z]+$/) ? true : false);
-        fieldValidationErrors.ccName = (ccNameValid ? "" : "Please enter name");
+        fieldValidationErrors.ccName = (ccNameValid ? "" : "Your name should only contain letters");
         break;
       case "number":
         numberValid = (value.match(/^[0-9]{16}/) ? true : false);
         fieldValidationErrors.number = (numberValid
           ? ""
-          : "Please enter card number");
+          : "Please enter a 16 digits card number");
         break;
       case "exp":
         expValid = (value.match(/^[0-9]{4}/) ? true : false);
-        fieldValidationErrors.exp = (expValid ? "" : "Date is invalid");
+        fieldValidationErrors.exp = (expValid ? "" : "Please enter date in format: MMDD");
         break;
       case "cvc":
         cvcValid = (value.match(/^[0-9]{3}/) ? true : false);
-        fieldValidationErrors.cvc = (cvcValid ? "" : "Security code is invalid");
+        fieldValidationErrors.cvc = (cvcValid ? "" : "Security code should only be 3 digits");
         break;
       default:
         break;
@@ -110,11 +116,12 @@ export default class CreditCardForm extends Component {
           />
           <div className="form-container">
             <form onSubmit={this.handleSubmit}>
-              <FormErrors formErrors={formErrors} />
+              {/* <FormErrors formErrors={formErrors.number} /> */}
               <div className="form-group">
                 {/* Credit Card Number */}
                 <Input
                   id="number"
+                  name="number"
                   type="text"
                   title="Card Number"
                   value={number}
@@ -123,20 +130,24 @@ export default class CreditCardForm extends Component {
                   maxLength="16"
                   ref={this.inputFocus}
                 />
+                <FormErrors formError={formErrors.number} />
                 {/* Cardholder's Name */}
                 <Input
                   id="ccName"
+                  name="ccName"
                   type="text"
                   title="Name on card"
                   value={ccName}
                   onChange={this.handleUserInput}
                   onFocus={this.handleClickUnFlip}
                 />
+                <FormErrors formError={formErrors.ccName} />
               </div>
               <div className="form-group">
                 {/* Expiration date */}
                 <Input
                   id="exp"
+                  name="exp"
                   type="text"
                   title="Expiration date"
                   value={exp}
@@ -144,9 +155,11 @@ export default class CreditCardForm extends Component {
                   onFocus={this.handleClickUnFlip}
                   maxLength="4"
                 />
+                <FormErrors formError={formErrors.exp} />
                 {/* Security code */}
                 <Input
                   id="cvc"
+                  name="cvc"
                   type="text"
                   title="Security code"
                   value={cvc}
@@ -154,6 +167,7 @@ export default class CreditCardForm extends Component {
                   onFocus={this.handleClickFlip}
                   maxLength="3"
                 />
+                <FormErrors formError={formErrors.cvc} />
               </div>
               <input type="submit" value="Submit" disabled={!this.state.formValid} />
             </form>

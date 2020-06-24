@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import VirtualCreditCard from "./CreditCard";
 import Input from "./Input";
-import Button from "./Button";
 import FormErrors from "./FormErrors";
 import "./form-container.css";
 
@@ -25,6 +24,7 @@ export default class CreditCardForm extends Component {
     this.handleClickFlip = this.handleClickFlip.bind(this);
     this.handleClickUnFlip = this.handleClickUnFlip.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.handleSubmit = this.handleSubmit(this);
   }
   handleUserInput = event => {
     const { name, value } = event.target;
@@ -34,28 +34,30 @@ export default class CreditCardForm extends Component {
   validateField(fieldName, value) {
     let fieldValidationErrors = this.state.formErrors;
     let { ccNameValid, numberValid, expValid, cvcValid } = this.state;
+
     switch (fieldName) {
       case "ccName":
-        ccNameValid = value.match(/^[a-zA-z]+$/);
-        fieldValidationErrors.ccName = ccNameValid ? "" : "Please enter name";
+        ccNameValid = (value.match(/^[a-zA-z]+$/) ? true : false);
+        fieldValidationErrors.ccName = (ccNameValid ? "" : "Please enter name");
         break;
       case "number":
-        numberValid = value.match(/^[0-9]{16}/);
-        fieldValidationErrors.number = numberValid
+        numberValid = (value.match(/^[0-9]{16}/) ? true : false);
+        fieldValidationErrors.number = (numberValid
           ? ""
-          : "Please enter card number";
+          : "Please enter card number");
         break;
       case "exp":
-        expValid = value.match(/^[0-9]{4}/);
-        fieldValidationErrors.exp = expValid ? "" : "Date is invalid";
+        expValid = (value.match(/^[0-9]{4}/) ? true : false);
+        fieldValidationErrors.exp = (expValid ? "" : "Date is invalid");
         break;
       case "cvc":
-        cvcValid = value.match(/^[0-9]{3}/);
-        fieldValidationErrors.cvc = cvcValid ? "" : "Security code is invalid";
+        cvcValid = (value.match(/^[0-9]{3}/) ? true : false);
+        fieldValidationErrors.cvc = (cvcValid ? "" : "Security code is invalid");
         break;
       default:
         break;
     }
+
     this.setState(
       {
         formErrors: fieldValidationErrors,
@@ -82,6 +84,14 @@ export default class CreditCardForm extends Component {
   handleClickUnFlip() {
     this.setState({ isFlipped: false });
   }
+  handleSubmit() {
+    this.setState({
+      ccName: "",
+      number: "",
+      exp: "",
+      cvc: ""
+    })
+  }
   render() {
     const { ccName, number, exp, cvc, formErrors, isFlipped } = this.state;
     return (
@@ -95,8 +105,8 @@ export default class CreditCardForm extends Component {
             isFlipped={isFlipped}
           />
           <div className="form-container">
-            <FormErrors formErrors={formErrors} />
-            <form>
+            <form onSubmit={this.handleSubmit}>
+              <FormErrors formErrors={formErrors} />
               <div className="form-group">
                 {/* Credit Card Number */}
                 <Input
@@ -141,7 +151,7 @@ export default class CreditCardForm extends Component {
                   maxLength="3"
                 />
               </div>
-              <Button title="Submit" disabled={!this.state.formValid} />
+              <input type="submit" value="Submit" disabled={!this.state.formValid} />
             </form>
           </div>
         </div>

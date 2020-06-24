@@ -21,3 +21,26 @@ input:focus {
   border: 1px solid #103c42;
   outline: none;
 }
+
+input[type="submit"] {
+  width: 400px;
+  height: 40px;
+  border-radius: 0px;
+  border: #ee5935;
+  margin-top: 15px;
+  background-color: #ee5935;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 0;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  text-decoration: underline;
+}
+
+input[type="submit"]:disabled:hover {
+  cursor: not-allowed;
+  text-decoration: none;
+}

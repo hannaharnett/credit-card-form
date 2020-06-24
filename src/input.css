@@ -6,31 +6,33 @@
 
 label {
   font-size: 17px;
-  color: #a7a4a8;
+  color: #6b6b6b;
+  margin: 10px 0 3px 0;
 }
 
 input {
   width: 196;
-  height: 30px;
-  border: 1px solid #bcb3c1;
-  font-size: 15px;
-  padding-left: 5px;
+  height: 40px;
+  border: 1px solid #6b6b6b;
+  border-radius: 5px;
+  font-size: 17px;
+  padding-left: 7px;
 }
 
-input:focus {
-  border: 1px solid #103c42;
+input:focus, input[type="submit"]:focus {
+  border: 1.5px solid #103c42;
   outline: none;
 }
 
 input[type="submit"] {
   width: 400px;
   height: 40px;
-  border-radius: 0px;
-  border: #ee5935;
+  border-radius: 5px;
+  border: 1px solid #ee5935;
   margin-top: 15px;
   background-color: #ee5935;
   color: #fff;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   padding: 0;
   cursor: pointer;
@@ -38,7 +40,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   text-decoration: underline;
-}
+} 
 
 input[type="submit"]:disabled:hover {
   cursor: not-allowed;

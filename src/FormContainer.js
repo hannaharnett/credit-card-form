@@ -110,8 +110,8 @@ export default class CreditCardForm extends Component {
               <div className="form-group">
                 {/* Credit Card Number */}
                 <Input
+                  id="number"
                   type="text"
-                  name="number"
                   title="Card Number"
                   value={number}
                   onChange={this.handleUserInput}
@@ -120,8 +120,8 @@ export default class CreditCardForm extends Component {
                 />
                 {/* Cardholder's Name */}
                 <Input
+                  id="ccName"
                   type="text"
-                  name="ccName"
                   title="Name on card"
                   value={ccName}
                   onChange={this.handleUserInput}
@@ -131,19 +131,18 @@ export default class CreditCardForm extends Component {
               <div className="form-group">
                 {/* Expiration date */}
                 <Input
+                  id="exp"
                   type="text"
-                  name="exp"
                   title="Expiration date"
                   value={exp}
-                  placeholder="MM / YY"
                   onChange={this.handleUserInput}
                   onFocus={this.handleClickUnFlip}
                   maxLength="4"
                 />
                 {/* Security code */}
                 <Input
+                  id="cvc"
                   type="text"
-                  name="cvc"
                   title="Security code"
                   value={cvc}
                   onChange={this.handleUserInput}

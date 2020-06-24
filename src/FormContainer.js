@@ -20,11 +20,15 @@ export default class CreditCardForm extends Component {
       formValid: false,
       isFlipped: false
     };
+    this.inputFocus = React.createRef();
     this.handleUserInput = this.handleUserInput.bind(this);
     this.handleClickFlip = this.handleClickFlip.bind(this);
     this.handleClickUnFlip = this.handleClickUnFlip.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.handleSubmit = this.handleSubmit(this);
+  }
+  componentDidMount() {
+    this.inputFocus.current.focus();
   }
   handleUserInput = event => {
     const { name, value } = event.target;
@@ -117,6 +121,7 @@ export default class CreditCardForm extends Component {
                   onChange={this.handleUserInput}
                   onFocus={this.handleClickUnFlip}
                   maxLength="16"
+                  ref={this.inputFocus}
                 />
                 {/* Cardholder's Name */}
                 <Input

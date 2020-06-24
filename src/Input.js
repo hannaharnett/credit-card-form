@@ -1,7 +1,7 @@
 import React from "react";
 import "./input.css";
 
-const Input = props => {
+const Input = React.forwardRef((props, ref) => {
   const { id, title, type, value, onChange, onFocus, minLength, maxLength } = props;
   return (
     <div className="input-container">
@@ -17,9 +17,11 @@ const Input = props => {
         onFocus={onFocus}
         minLength={minLength}
         maxLength={maxLength}
+        autoComplete="off"
+        ref={ref}
       />
     </div>
   );
-};
+});
 
 export default Input;
